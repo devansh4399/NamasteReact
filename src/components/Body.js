@@ -1,19 +1,25 @@
  import RestaurantCard from "./RestaurantCard";
  import resList from "../utils/mockData";
+import { useState } from "react";
  
 
  let newResList=[];
 
   
  const Body =()=>{
+    const [listOfRestaurants,setlistOfRestaurants]= useState(resList);
+
+
          return (
             <div className="body">
                <div className="filter">
-                    <button className="filter-btn" onClick={()=>{
-                      newResList=resList.filter((items)=> 
-                         items.info.avgRating>4.5
+                    <button className="filter-btn"
+                     onClick={()=>{
+                      const filteredRestaurant=listOfRestaurants.filter(
+                        (res)=> res.info.avgRating>4.4
                         );
-                        console.log(newResList);
+                         setlistOfRestaurants(filteredRestaurant);
+                        console.log(filteredRestaurant);
                     }
                     }>Top Rated Restaurant</button>
                </div>
@@ -24,7 +30,7 @@
                    now rather tahn passing 0,1,2 we wiluse map funtion to pass all.*/}
                   
 
-                   {resList.map((restaurant)=>{
+                   {listOfRestaurants.map((restaurant)=>{
                      return <RestaurantCard key={restaurant.info.id} resData={restaurant}/>})}
                      
                </div>
