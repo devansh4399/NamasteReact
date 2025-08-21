@@ -21,3 +21,10 @@ import component from path.
 
 export const Component/variable.
 import {name} from path.
+
+# React Hooks
+It is a normal javascript funtions.
+-useState() = superpowerful react variable
+-useEffect() 
+
+USe Effect Hook
