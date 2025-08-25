@@ -1,6 +1,6 @@
  import RestaurantCard from "./RestaurantCard";
  import resList from "../utils/mockData";
-import { useState } from "react";
+import { useEffect, useState } from "react";
  
 
  let newResList=[];
@@ -9,6 +9,21 @@ import { useState } from "react";
  const Body =()=>{
     const [listOfRestaurants,setlistOfRestaurants]= useState(resList);
 
+    useEffect(()=>{
+        fetchData()
+    },[]);
+  //making the function async to resolve the promise
+
+  //and then awaiting for the data to fethc from the api.
+    const fetchData=async ()=>{
+        const data= await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.8845097&lng=77.6035522&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+
+        //now this data comes in from of promise so needs to be converted into json
+
+        const json= await data.json();
+            setlistOfRestaurants(json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants);
+        console.log(json);
+    };
 
          return (
             <div className="body">
