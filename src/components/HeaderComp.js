@@ -1,6 +1,10 @@
 import { CDN_LINK } from "../utils/contant";
-
+import { useState } from "react";
 const HeaderComp = () =>{
+
+
+
+  const [buttonNameReact,setbuttonNameReact]=useState("Login");
       return(
           <div className="header">
            <div className="logo-container">
@@ -12,6 +16,10 @@ const HeaderComp = () =>{
                <li>About Us</li>
                <li>Contact Us</li>
                <li>Carts</li>
+               <button className="login-button"
+               onClick={()=>{
+               setbuttonNameReact("Logout")
+               }}>{buttonNameReact}</button>
             </ul>
            </div>
           </div>

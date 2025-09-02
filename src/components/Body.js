@@ -1,13 +1,13 @@
  import RestaurantCard from "./RestaurantCard";
  import resList from "../utils/mockData";
 import { useEffect, useState } from "react";
- 
+import Shimmer from "./Shimmer";
 
  let newResList=[];
 
   
  const Body =()=>{
-    const [listOfRestaurants,setlistOfRestaurants]= useState(resList);
+    const [listOfRestaurants,setlistOfRestaurants]= useState([]);//now no initial restautant lists
 
     useEffect(()=>{
         fetchData()
@@ -21,11 +21,17 @@ import { useEffect, useState } from "react";
         //now this data comes in from of promise so needs to be converted into json
 
         const json= await data.json();
-            setlistOfRestaurants(json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants);
+            setlistOfRestaurants(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
         console.log(json);
     };
 
-         return (
+    // //conditional rendering 
+    // if(listOfRestaurants.length===0)
+    // {
+    //   return <Shimmer></Shimmer>
+    // }
+
+         return listOfRestaurants.length===0 ? (<Shimmer></Shimmer> ) : (
             <div className="body">
                <div className="filter">
                     <button className="filter-btn"
