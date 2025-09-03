@@ -18,7 +18,7 @@ const HeaderComp = () =>{
                <li>Carts</li>
                <button className="login-button"
                onClick={()=>{
-               setbuttonNameReact("Logout")
+               buttonNameReact==="Login"?setbuttonNameReact("Logout"):setbuttonNameReact("Login")
                }}>{buttonNameReact}</button>
             </ul>
            </div>
