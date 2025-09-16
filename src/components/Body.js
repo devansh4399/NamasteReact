@@ -9,6 +9,7 @@ import Shimmer from "./Shimmer";
  const Body =()=>{
     const [listOfRestaurants,setlistOfRestaurants]= useState([]);//now no initial restautant lists
     const [searchText,setSearchText]=useState("");
+    const [filterRestaurant,setFilterRestaurant]=useState([]);
 
     console.log(listOfRestaurants);
 
@@ -25,6 +26,7 @@ import Shimmer from "./Shimmer";
 
         const json= await data.json();
             setlistOfRestaurants(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+            setFilterRestaurant(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
         console.log(json);
     };
 
@@ -44,8 +46,8 @@ import Shimmer from "./Shimmer";
                   <button className="search-button"
                   onClick={()=>{
                     const filteredList=listOfRestaurants.filter((res)=>
-                    res.info.name.includes(searchText));
-                    setlistOfRestaurants(filteredList);
+                    res.info.name.toLowerCase().includes(searchText.toLowerCase()));
+                     setFilterRestaurant(filteredList);
                    
                   }}
                   //here we will add search button to search what we type
@@ -53,10 +55,10 @@ import Shimmer from "./Shimmer";
                 </div>
                     <button className="filter-btn"
                      onClick={()=>{
-                      const filteredRestaurant=listOfRestaurants.filter(
-                        (res)=> res.info.avgRating>4.4
+                      const filteredRestaurant=filterRestaurant.filter(
+                        (res)=> res.info.avgRating>4.5
                         );
-                         setlistOfRestaurants(filteredRestaurant);
+                         setFilterRestaurant(filteredRestaurant);
                         console.log(filteredRestaurant);
                         
                     }
@@ -69,7 +71,7 @@ import Shimmer from "./Shimmer";
                    now rather tahn passing 0,1,2 we wiluse map funtion to pass all.*/}
                   
 
-                   {listOfRestaurants.map((restaurant)=>{
+                   {filterRestaurant.map((restaurant)=>{
                      return <RestaurantCard key={restaurant.info.id} resData={restaurant}/>})}
                      
                </div>
