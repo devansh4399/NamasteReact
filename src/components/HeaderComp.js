@@ -1,10 +1,17 @@
 import { CDN_LINK } from "../utils/contant";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const HeaderComp = () =>{
 
 
 
-  const [buttonNameReact,setbuttonNameReact]=useState("Login");
+  const [buttonNameReact,setbuttonNameReact]=useState( "Login");
+  //there are 3 cases on which useEffect is called
+  //1 when no dependecy array, then on every render of header comp useEffect will be called
+  //2 when dependency array is empty, then useEffect will be called only once which is inital render.
+  //3 when dependency array has some value, then useEffect will be called on change of that value.
+  useEffect(()=>{
+    console.log("UseEffect called")},[]
+  );
       return(
           <div className="header">
            <div className="logo-container">
