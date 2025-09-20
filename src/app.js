@@ -2,11 +2,17 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import HeaderComp from "./components/HeaderComp";
 import Body from "./components/Body";
+import About from "./components/About";
+import Contact from "./components/Contact";
+import Error from "./components/Error";
+import RestaurantMenu from "./components/RestaurantMenu";
+import { Outlet, RouterProvider,createBrowserRouter } from "react-router-dom";
+
 /* <div id="parent">
       <div id="child">
          <h1>I am H1</h1>
          <h2> I am H2</h2>
-
+s
          </div>
          </div>
          */
@@ -139,12 +145,49 @@ console.log(resObj.data.name);
          return (
             <div className="app">
                <HeaderComp></HeaderComp>
-               <Body></Body>
+               <Outlet></Outlet>
+               {/* <Body></Body> */}
             </div>
          )
       }
 
       const root=ReactDOM.createRoot(document.getElementById("root"));
 
-      root.render(<AppLayout/>);
+      const appRouter=createBrowserRouter([
+         {
+         path:"/",
+         element:<AppLayout></AppLayout>,
+         children:[
+            {
+               path:"/",
+               element:<Body></Body>
+            },
+            {
+         path:"/about",
+         element:<About></About>
+      },
+      {
+         path:"/contact",
+         element:<Contact></Contact>
+      }
+      ,{
+         path:"/restaurants/:resId",
+         element:<RestaurantMenu></RestaurantMenu>
+      }
+         ],
+         errorElement:<Error></Error>
+      // },
+      // {
+      //    path:"/about",
+      //    element:<About></About>
+      // },
+      // {
+      //    path:"/contact",
+      //    element:<Contact></Contact>
+      // }
+         }
+   ]);
+
+      //root.render(<AppLayout/>);
+      root.render(<RouterProvider router={appRouter}/>);
 
