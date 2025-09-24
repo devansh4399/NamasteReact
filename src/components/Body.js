@@ -2,6 +2,7 @@
  import resList from "../utils/mockData";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
  let newResList=[];
 
@@ -71,8 +72,14 @@ import Shimmer from "./Shimmer";
                    now rather tahn passing 0,1,2 we wiluse map funtion to pass all.*/}
                   
 
-                   {filterRestaurant.map((restaurant)=>{
-                     return <RestaurantCard key={restaurant.info.id} resData={restaurant}/>})}
+                   {filterRestaurant.map((restaurant)=>(
+                     
+                     <Link
+                     key={restaurant.info.id}
+                      to={"/restaurants/"+ restaurant.info.id }>
+                      <RestaurantCard resData={restaurant}></RestaurantCard>
+                       </Link>))}
+                     
                      
                </div>
             </div>
