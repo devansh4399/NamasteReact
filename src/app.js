@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense,lazy } from "react";
 import ReactDOM from "react-dom/client";
 import HeaderComp from "./components/HeaderComp";
 import Body from "./components/Body";
@@ -7,6 +7,7 @@ import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 import { Outlet, RouterProvider,createBrowserRouter } from "react-router-dom";
+import Grocery from "./components/Grocery";
 
 /* <div id="parent">
       <div id="child">
@@ -141,6 +142,8 @@ console.log(resObj.data.name);
          
      
       //not using key in map is not accepatable either key unique value or use index.<<<<<<<<best practise.
+
+      const Grocery=lazy(()=>import("./components/Grocery"));
       const AppLayout = () =>{
          return (
             <div className="app">
@@ -169,6 +172,10 @@ console.log(resObj.data.name);
       {
          path:"/contact",
          element:<Contact></Contact>
+      },
+      {
+         path:"/grocery",
+         element:<Suspense fallback={<h1>Loading....</h1>}><Grocery></Grocery></Suspense>
       }
       ,{
          path:"/restaurants/:resId",

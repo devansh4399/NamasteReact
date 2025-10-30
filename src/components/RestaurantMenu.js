@@ -5,24 +5,27 @@ import { useParams } from "react-router-dom";
 
 import { useParams } from "react-router-dom";
 import { MENU_LINK } from "../utils/contant";
+import useRestaunrantMenu from "../utils/useRestaurantMenu";
 
 
  const RestaurantMenu=()=>{
 
     const{resId}=useParams();
 
-    const[resInfo,setresInfo]=useState(null);
-    useEffect(()=>{
-        fetchData();},[]
-    );
+    // const[resInfo,setresInfo]=useState(null);
+    // useEffect(()=>{
+    //     fetchData();},[]
+    // );
 
 
-    const fetchData =async ()=>{
-        const data=await fetch(MENU_LINK+resId);
-        const json=await data.json();
-        setresInfo(json.data);
-        console.log(json);
-    };
+    // const fetchData =async ()=>{
+    //     const data=await fetch(MENU_LINK+resId);
+    //     const json=await data.json();
+    //     setresInfo(json.data);
+    //     console.log(json);
+    // };
+
+    const resInfo=useRestaunrantMenu(resId);
      if (!resInfo) {
         return <Shimmer />;
     }
@@ -41,6 +44,8 @@ import { MENU_LINK } from "../utils/contant";
             <li key={items.card.info.id}> 
             { items.card.info.name} - Rs.  { items.card.info.price/100}</li>
         )}
+        <li key={itemCards[0].card.info.id}></li>
+        {itemCards[0].card.info.name}
         {/* <li>{itemCards[0].card.info.name}</li>
          <li>{itemCards[1].card.info.name}</li>
           <li>{itemCards[2].card.info.name}</li>

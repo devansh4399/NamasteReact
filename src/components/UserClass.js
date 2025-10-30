@@ -6,11 +6,25 @@ class UserClass extends React.Component
     
 
     this.state={
-        count:1,
-        count2:0,
+        userInfo:{
+            name:"Dummy",
+            location:"Default",
+            avatar:"photo",
+        }
     };
 }
 
+
+    async componentDidMount()
+    {
+        const data= await fetch("https://api.github.com/users/devansh4399");
+        const json= await data.json();
+        this.setState({
+            userInfo:json,
+        });
+
+
+    }
 
     render()
     {
@@ -19,8 +33,9 @@ class UserClass extends React.Component
          return (
         <div className="user-card">
 
-            <h1>Name:Devansh</h1>
-            <h2>Place:bangalore</h2>
+            <h1>Name:{this.state.userInfo.login}</h1>
+    
+            <img src={this.state.userInfo.avatar_url}></img>
             <h3>count:{count}</h3>
            <button onClick={()=>
             {
