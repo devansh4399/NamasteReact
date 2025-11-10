@@ -1,5 +1,4 @@
- import RestaurantCard from "./RestaurantCard";
- import resList from "../utils/mockData";
+ import RestaurantCard,{withGoodReview} from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
@@ -15,6 +14,8 @@ import useOnlineStatus from "../utils/useOnlineStatus";
 
     console.log(listOfRestaurants);
 
+    const RestaurantCardGood=withGoodReview(RestaurantCard);//calling a higher order function and giving input as a comp
+
     useEffect(()=>{
         fetchData()
     },[]);
@@ -27,6 +28,7 @@ import useOnlineStatus from "../utils/useOnlineStatus";
         //now this data comes in from of promise so needs to be converted into json
 
         const json= await data.json();
+        console.log(json);
             setlistOfRestaurants(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
             setFilterRestaurant(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
         console.log(json);
@@ -47,11 +49,12 @@ import useOnlineStatus from "../utils/useOnlineStatus";
          return listOfRestaurants.length===0 ? (<Shimmer></Shimmer> ) : (
             <div className="body">
                <div className="filter">
-                <div className="search">
+                {/* <div className="search"> */}
+                <div className="border border-solid border-black">
                   <input type="text" className="search-box" value={searchText} onChange={(e)=>
                     {setSearchText(e.target.value);
                   }}></input>
-                  <button className="search-button"
+                  <button className="search-button rounded-lg"
                   onClick={()=>{
                     const filteredList=listOfRestaurants.filter((res)=>
                     res.info.name.toLowerCase().includes(searchText.toLowerCase()));
@@ -61,7 +64,7 @@ import useOnlineStatus from "../utils/useOnlineStatus";
                   //here we will add search button to search what we type
                   >Search</button>
                 </div>
-                    <button className="filter-btn"
+                    <button className="topRated"
                      onClick={()=>{
                       const filteredRestaurant=filterRestaurant.filter(
                         (res)=> res.info.avgRating>4.5
@@ -84,7 +87,10 @@ import useOnlineStatus from "../utils/useOnlineStatus";
                      <Link
                      key={restaurant.info.id}
                       to={"/restaurants/"+ restaurant.info.id }>
-                      <RestaurantCard resData={restaurant}></RestaurantCard>
+                        {
+                        restaurant.info.avgRating>4.3?<RestaurantCardGood resData={restaurant}/>: <RestaurantCard resData={restaurant}></RestaurantCard>
+                        }
+                     
                        </Link>))}
                      
                      

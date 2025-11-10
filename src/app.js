@@ -8,7 +8,7 @@ import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 import { Outlet, RouterProvider,createBrowserRouter } from "react-router-dom";
 import Grocery from "./components/Grocery";
-
+import "./index.css";
 /* <div id="parent">
       <div id="child">
          <h1>I am H1</h1>

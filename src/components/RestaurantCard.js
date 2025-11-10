@@ -15,4 +15,17 @@ const RestaurantCard = (props) =>{
             )
          };
 
+         export const withGoodReview=(RestaurantCard)=>{
+    //returning a componenet so added arrow function
+            return (props)=>{
+               //return piece of js
+               return(
+                     <div>
+                        <span className="tag">Good Restaurant</span>
+                        <RestaurantCard {...props}/>
+                     </div>
+               );
+            };
+         };
+
          export default RestaurantCard;
