@@ -1,6 +1,11 @@
+import { useContext } from "react";
 import { FOOD_LINK } from "../utils/contant";
+import userContext from "../utils/UserContext";
 
 const RestaurantCard = (props) =>{
+
+   const {loggedInUser}=useContext(userContext);
+   console.log(loggedInUser);
 
 
             const {resData}=props;
@@ -11,6 +16,7 @@ const RestaurantCard = (props) =>{
                   <h4>{resData.info.cuisines.join(",")}</h4>
                   <h5>{resData.info.costForTwo}</h5>
                   <h6>{resData.info.sla.deliveryTime} minutes</h6>
+                  <h6>{loggedInUser}</h6>
                </div>
             )
          };

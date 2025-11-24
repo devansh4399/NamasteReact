@@ -1,7 +1,13 @@
 import ItemCards from "./ItemCards";
 import itemCards from "./ItemCards";
+import { useState } from "react";
 
 const RestaurantCategory = ({data})=>{
+
+    const onHandleClick=()=>{
+        setShowIndex();
+    }
+
     return (
         <div className="w-6/12 mx-auto py-4 shadow-lg ">
             <div className="flex justify-between">

@@ -12,6 +12,8 @@ import RestaurantCategory from "./RestaurantCategory";
 
  const RestaurantMenu=()=>{
 
+    const [showIndex,setShowIndex]=useState();
+
     const{resId}=useParams();
 
     // const[resInfo,setresInfo]=useState(null);
@@ -46,11 +48,13 @@ import RestaurantCategory from "./RestaurantCategory";
    {/* here we will create our accrodian i.e. before the menu */}
 
    
-  {
-    categories.map((category)=>(
-        <RestaurantCategory data={category?.card?.card}/>
-    ))
-  }
+ {categories.map((category) => (
+  <RestaurantCategory
+    key={category?.card?.card?.title}
+    data={category?.card?.card}
+    setShowIndex={() => setShowIndex(index)}
+  />
+))}
     <h2>Menu</h2>
     <ul>
         {itemCards.map((items)=>

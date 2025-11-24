@@ -1,8 +1,10 @@
  import RestaurantCard,{withGoodReview} from "./RestaurantCard";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
+
 
  let newResList=[];
 
@@ -11,6 +13,8 @@ import useOnlineStatus from "../utils/useOnlineStatus";
     const [listOfRestaurants,setlistOfRestaurants]= useState([]);//now no initial restautant lists
     const [searchText,setSearchText]=useState("");
     const [filterRestaurant,setFilterRestaurant]=useState([]);
+
+    const{loggedInUser,setUserName}=useContext(UserContext);
 
     console.log(listOfRestaurants);
 
@@ -74,6 +78,12 @@ import useOnlineStatus from "../utils/useOnlineStatus";
                         
                     }
                     }>Top Rated Restaurant</button>
+               </div>
+               <div>
+                <label>User Name:</label>
+                <input type="text" value={loggedInUser} onChange={(e)=>
+                  setUserName(e.target.value)
+                } ></input>
                </div>
                <div className="res-container">
                   {/* <RestaurantCard  resData={resList[0]}></RestaurantCard>

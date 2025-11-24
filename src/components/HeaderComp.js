@@ -1,8 +1,9 @@
 import { CDN_LINK } from "../utils/contant";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 
 const HeaderComp = () =>{
@@ -17,6 +18,9 @@ const HeaderComp = () =>{
   useEffect(()=>{
     console.log("UseEffect called")},[]
   );
+
+  const {loggedInUser}=useContext(UserContext);
+
 
   const onlineStatus=useOnlineStatus();
       return(
@@ -54,6 +58,9 @@ const HeaderComp = () =>{
                onClick={()=>{
                buttonNameReact==="Login"?setbuttonNameReact("Logout"):setbuttonNameReact("Login")
                }}>{buttonNameReact}</button>
+               <li>
+                {loggedInUser}
+               </li>
             </ul>
            </div>
           </div>
