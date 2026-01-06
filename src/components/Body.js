@@ -4,6 +4,8 @@ import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
+import { useDispatch } from "react-redux";
+import { addItem } from "../utils/cartSlice";
 
 
  let newResList=[];
@@ -15,6 +17,12 @@ import UserContext from "../utils/UserContext";
     const [filterRestaurant,setFilterRestaurant]=useState([]);
 
     const{loggedInUser,setUserName}=useContext(UserContext);
+
+    const dispatch=useDispatch();
+
+    const handleAddItem=()=>{
+      dispatch(addItem("pizza"))
+    };
 
     console.log(listOfRestaurants);
 
@@ -78,6 +86,7 @@ import UserContext from "../utils/UserContext";
                         
                     }
                     }>Top Rated Restaurant</button>
+                    <button className="topRated" onClick={handleAddItem}>Add to Cart</button>
                </div>
                <div>
                 <label>User Name:</label>

@@ -1,10 +1,25 @@
 {
   "devDependencies": {
-    "parcel": "^2.15.4"
+    "@babel/core": "^7.28.5",
+    "@babel/preset-env": "^7.28.5",
+    "@parcel/transformer-react-refresh-wrap": "^2.16.3",
+    "@tailwindcss/postcss": "^4.1.16",
+    "@testing-library/react": "^16.3.1",
+    "autoprefixer": "^10.4.21",
+    "babel-jest": "^30.2.0",
+    "init": "^0.1.2",
+    "jest": "^30.2.0",
+    "npx": "^10.2.2",
+    "parcel": "^2.16.3",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.18"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.11.2",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^6.11.2"
   },
   "name": "namaste-react",
   "version": "1.0.0",

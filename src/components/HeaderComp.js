@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
 
 
 const HeaderComp = () =>{
@@ -20,6 +21,9 @@ const HeaderComp = () =>{
   );
 
   const {loggedInUser}=useContext(UserContext);
+//susbscribing to our store but here we will tell we only subscribing to items so store.car.items
+   const cartItems=useSelector((store)=>store.cart.items);
+
 
 
   const onlineStatus=useOnlineStatus();
@@ -52,8 +56,10 @@ const HeaderComp = () =>{
                 <Link to="/grocery">
                 Contact Us
                 </Link>
+                
                 </li>
-               <li>Carts</li>
+               <li>
+                <Link to="/cart"> Carts - ({cartItems.length}) </Link></li>
                <button className="login-button"
                onClick={()=>{
                buttonNameReact==="Login"?setbuttonNameReact("Logout"):setbuttonNameReact("Login")

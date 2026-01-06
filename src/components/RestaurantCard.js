@@ -4,6 +4,10 @@ import userContext from "../utils/UserContext";
 
 const RestaurantCard = (props) =>{
 
+   const handleAddItem=()=>{
+
+   };
+
    const {loggedInUser}=useContext(userContext);
    console.log(loggedInUser);
 
@@ -18,6 +22,7 @@ const RestaurantCard = (props) =>{
                   <h6>{resData.info.sla.deliveryTime} minutes</h6>
                   <h6>{loggedInUser}</h6>
                </div>
+               
             )
          };
 
