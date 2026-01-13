@@ -28,3 +28,25 @@ It is a normal javascript funtions.
 -useEffect() 
 
 USe Effect Hook
+
+# Redux Toolkit
+- Install @reduxjs/toolkit  redux toolkit
+- Build out store
+- Connect our store to app
+- slice (catrslice)
+- dispatch(Action)
+- 
+
+
+#Testing
+
+Install React Testing Library
+Insall Jest
+Install babel Dependencies
+configure babel
+confifure parcel config file to disable default babel transpilation
+Jest -npx jest -init
+Install jsdom library
+Install @babel/present-react - to make JSX work in test cases
+include @babel/present-react inside babel configuration
+npm i -D @testing-library/jest-dom
