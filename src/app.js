@@ -1,4 +1,4 @@
-import React, { Suspense,lazy } from "react";
+import React, { Suspense,lazy, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import HeaderComp from "./components/HeaderComp";
 import Body from "./components/Body";
@@ -8,7 +8,11 @@ import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 import { Outlet, RouterProvider,createBrowserRouter } from "react-router-dom";
 import Grocery from "./components/Grocery";
-
+import "./index.css";
+import UserContext from "./utils/UserContext";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
+import Cart from "./components/Cart";
 /* <div id="parent">
       <div id="child">
          <h1>I am H1</h1>
@@ -145,12 +149,30 @@ console.log(resObj.data.name);
 
       const Grocery=lazy(()=>import("./components/Grocery"));
       const AppLayout = () =>{
+
+         const[userName,setUserName]=useState();
+
+         useEffect(()=>{
+            //authentication code
+            const data={
+               userName:"Devansh",
+            };
+            setUserName(data.userName)
+         },[]);
+         
          return (
             <div className="app">
+              
+            <Provider store={appStore}>
+              <UserContext.Provider value={{loggedInUser:userName,setUserName}}>
                <HeaderComp></HeaderComp>
                <Outlet></Outlet>
+           </UserContext.Provider>
+           </Provider>
                {/* <Body></Body> */}
+               
             </div>
+            
          )
       }
 
@@ -180,6 +202,10 @@ console.log(resObj.data.name);
       ,{
          path:"/restaurants/:resId",
          element:<RestaurantMenu></RestaurantMenu>
+      },
+      {
+         path:"/cart",
+         element:<Cart></Cart>
       }
          ],
          errorElement:<Error></Error>
